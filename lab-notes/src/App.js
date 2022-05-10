@@ -1,15 +1,17 @@
 import React from 'react';
-/* import './App.css'; */
+import './App.css';
 import {
   Link,
   Route,
   Routes
 } from "react-router-dom";
 import Home from './components/Home'
+import Wall from './components/Wall'
 
 //Se crean componentes para hacre el ruteo
 //const Home = () => <h1>Home</h1>
-const Wall = () => <h1>Wall</h1>
+//const Wall = () => <h1>Wall</h1>
+const NotFound = () => <h1>NotFound</h1> 
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/wall' element={<Wall />} />
+          <Route path="*" element={<NotFound />} /> 
         </Routes>
       </header>
     </div>

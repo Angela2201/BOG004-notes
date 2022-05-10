@@ -1,19 +1,43 @@
+body {
+  background-image: url(https://i.imgur.com/3RmGDYf.jpg);
+  margin: 0;
+  background-position: center;
+}
+
+.logo {
+  width: 82%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 8px auto;
+  border-radius: 26px;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#home {
+  width: 70%;
+  height: 51vh;
+  /* background-color: #ffffff95; */
+  margin: auto;
+  margin-top: 24%;
+  border-radius: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+#btn-google {
+  align-items: center;
+  width: 70%;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.App-header {
+ */
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,9 +46,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -35,4 +59,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
