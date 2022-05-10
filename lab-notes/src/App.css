@@ -1,11 +1,10 @@
 body {
-  background-image: url(https://i.imgur.com/3RmGDYf.jpg);
-  margin: 0;
-  background-position: center;
+  background-image: linear-gradient(to right, rgb(30, 30, 92) , rgb(96, 104, 177));
+  margin: 0;  
 }
 
 .logo {
-  width: 82%;
+  width: 60%;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -18,45 +17,24 @@ body {
 }
 
 #home {
-  width: 70%;
-  height: 51vh;
-  /* background-color: #ffffff95; */
-  margin: auto;
-  margin-top: 24%;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 137px;
 }
 
 #btn-google {
   align-items: center;
-  width: 70%;
+  width: 18%;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 40px;
 }
 
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
- */
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* .App-link {
-  color: #61dafb;
+.logoGoogle {
+  width: 52px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+h1 {
+  color: blanchedalmond;
+}

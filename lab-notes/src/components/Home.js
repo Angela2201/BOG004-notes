@@ -31,6 +31,7 @@ const Home = () => {
     return (
         <div id="view-home">
             <div id="home">
+                {/* <img className="image" src="https://i.imgur.com/3RmGDYf.jpg"></img> */}
                 <img className="logo" src="https://i.imgur.com/ncVcTA8.png"></img>
                 <button onClick={signInWithGoogle} id="btn-google">
                     <img className="logoGoogle" src="https://i.imgur.com/bD3SqPX.png" alt="logoGoogle"></img>
