@@ -1,9 +1,14 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-
-const Form = LogoutButton() 
+import { Notes } from "./Notes.js"
 
 const Wall = () => {
+    let Navigate = useNavigate()
+    function LogoutButton(e) {
+        e.preventDefault();
+        console.log("Tu click");
+        Navigate("/")
+    }
          
     return (
         <div id="wall">
@@ -11,10 +16,12 @@ const Wall = () => {
             <h1>{localStorage.getItem("email")}</h1>
             <form onSubmit={LogoutButton}>
             <button type="submit">
-            <img className="logOut" src="https://i.imgur.com/b3yYdUP.png"></img>
+                <img className="logOut" src="https://i.imgur.com/b3yYdUP.png"></img>
             </button>
-            </form> 
+            </form>
+            <Notes/> 
         </div>
+
             
     )
 }
@@ -22,22 +29,6 @@ const Wall = () => {
 
 export default Wall
 
-export function Form() {
-    let Navigate = useNavigate() 
 
-    function LogoutButton(e) {
-        e.preventDefault();
-        console.log("Tu click");
-    }
-        return (
-            <form onSubmit={LogoutButton}>
-            <button type="submit">
-                <img className="logOut" src="https://i.imgur.com/b3yYdUP.png"></img>
-                Navigate("/")
-            </button>
-            </form>
-        );
-    
-}
 
 
