@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "../firebase/firebase.js"
+import { addDoc, CollectionReference, getFirestore } from "firebase/firestore";
 
 export const Notes = () => {
 
@@ -19,14 +19,16 @@ export const Notes = () => {
     }
 
     //Se crea el evento del botón para guardar la nota
-    const guardarDatos = (event) => {
+    const guardarDatos = async (event) => {
         event.preventDefault();
-        db.collection("noteCollection").add({
+        /* console.log(datos.title + ' ' + datos.description) */
+        let docRef = await addDoc(CollectionReference(getFirestore, "noteCollection"), 
+        {
             title: '',
             description: '',
         })
-        setDatos("");
-        /* console.log(datos.title + ' ' + datos.description) */
+        console.log(docRef)
+        console.log('hola')
     }
     
     return (
