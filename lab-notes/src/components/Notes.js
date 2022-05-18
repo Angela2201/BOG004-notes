@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { addDoc, CollectionReference, getFirestore } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore/lite";
+import { db } from "../firebase/firebase";
 
-export const Notes = () => {
+export const Notes = () => { 
 
    const [datos, setDatos] = useState({
        title: '',
@@ -21,24 +22,23 @@ export const Notes = () => {
     //Se crea el evento del botón para guardar la nota
     const guardarDatos = async (event) => {
         event.preventDefault();
-        /* console.log(datos.title + ' ' + datos.description) */
-        let docRef = await addDoc(CollectionReference(getFirestore, "noteCollection"), 
-        {
-            title: '',
-            description: '',
-        })
-        console.log(docRef)
-        console.log('hola')
-    }
+        console.log(datos.title + ' ' + datos.description)
+        let dataToSend = {
+            title: datos.title,
+            description: datos.description
+        }
+        let docRef = await addDoc(collection(db, "noteCollection"), dataToSend)
+    };
     
     return (
-        <div>
+        <div id="note">
             <form onSubmit={guardarDatos}>
                 <div>
                     <input 
                         type="text" 
                         id="note-title" 
-                        name="title" 
+                        name="title"
+                        placeholder="Title Note" 
                         onChange={handleInputChange}>
                     </input>
                 </div>
@@ -62,12 +62,13 @@ export const Notes = () => {
                     <textarea 
                         type="text" 
                         id="note-description" 
-                        name="description" 
+                        name="description"
+                        placeholder="Description Note" 
                         onChange={handleInputChange}>
                     </textarea>
                 </div>
                 <div>
-                    <button type="submit">Save</button>
+                    <button id="button-note" type="submit">Save</button>
                 </div>
             </form>
             <h3>{datos.title} - {datos.description}</h3>

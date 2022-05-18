@@ -32,8 +32,6 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
-export { db };
-
 //Para obtener una lista de notas de la BD de Firebase
 async function getNotes(db) {
   const notesCol = collection(db, 'noteCollection');
@@ -42,6 +40,6 @@ async function getNotes(db) {
   return noteList;
 }
 
-
+export { db, getNotes };
 //Esta función es propia de Firestore para recargar autamaticamente las notas
 /* export { addDoc, collection, onSnapshot } */ 
