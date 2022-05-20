@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import "firebase/analytics";
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, query } from 'firebase/firestore/lite';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 /* import { getFirestore, addDoc, collection, onSnapshot } from "firebase/firestore";  */
@@ -23,7 +23,6 @@ const firebaseConfig = {
 
 };
 
-
 // Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
@@ -33,12 +32,16 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 //Para obtener una lista de notas de la BD de Firebase
-async function getNotes(db) {
-  const notesCol = collection(db, 'noteCollection');
+async function getNotes() {
+  const notesCol = query(collection(db, 'noteCollection'));
   const noteSnapshot = await getDocs(notesCol);
-  const noteList = noteSnapshot.docs.map(doc => doc.data());
+  const noteList = noteSnapshot.docs.map(doc =>{
+    return doc.data()
+  });
   return noteList;
 }
+
+
 
 export { db, getNotes };
 //Esta función es propia de Firestore para recargar autamaticamente las notas

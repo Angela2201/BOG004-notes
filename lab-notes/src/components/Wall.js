@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { ListNotes } from "./ListNotes.js";
 import { Notes } from "./Notes.js"
-/* import { getNotes } from "../firebase/firebase.js" */
 
 const Wall = () => {
     let Navigate = useNavigate()
@@ -11,14 +11,6 @@ const Wall = () => {
         Navigate("/")
     }
          
-/*     const [datos, setDatos] = useState ([])
-    getNotes().then(notesList => {
-        notesList.forEach(note => ([
-            ...datos, note
-        ]))
-        console.log(datos);
-    }) */
-
     return (
         <div id="wall">
             <div id="header">
@@ -32,13 +24,13 @@ const Wall = () => {
                     </button>
                 </form>
             </div>
-            <Notes/> 
+            <Notes/>
+            <ListNotes/>
         </div>
 
             
     )
 }
-
 
 export default Wall
 
