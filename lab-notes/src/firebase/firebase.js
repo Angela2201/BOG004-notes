@@ -41,8 +41,6 @@ async function getNotes() {
   return noteList;
 }
 
-
-
 export { db, getNotes };
 //Esta función es propia de Firestore para recargar autamaticamente las notas
 /* export { addDoc, collection, onSnapshot } */ 
