@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { getNotes } from "../firebase/firebase";
+import { db } from "../firebase/firebase"
+import { doc, deleteDoc } from "firebase/firestore"
 
+//En este componente se pintan las notas en el muro
+export const ListNotes = ({datos}) => {
 
-export const ListNotes = () => {
+    const handleEdit = () => {
+        console.log("Edita")
+    }
 
-    const [datos, setDatos] = useState([])
-
-    useEffect(() => {
-        console.log(useEffect);
-        getNotes().then((newData) => {
-            console.log(newData)
-            setDatos(newData)});
-    }, []);
-
+    //Se crea la función de eliminar las notas
+    const handleDelete = async (id) => {
+        console.log("nota borrada")
+        if (window.confirm("Are you sure you want to delete this note?")) {
+            const docRef = doc(db, 'noteCollection', id);
+            await deleteDoc(docRef);
+        }
+    }
+    
     return (
         <div> 
             <ul>{
-            datos.map(item => 
-                <li key = {item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
+            datos.map((item, id) => 
+                <li key = {id}>
+                    <textarea disabled value={item.title}/>
+                    <textarea disabled value={item.description}/>
+                    <button onClick={handleEdit}>Edit</button>
+                    <button onClick={() => handleDelete(item.id)}>Delete</button>
                 </li>
                 )
             }</ul>
         </div>
     )
 }
-
-

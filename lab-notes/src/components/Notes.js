@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { addDoc, collection } from "firebase/firestore/lite";
-import { db } from "../firebase/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { db, getNotes } from "../firebase/firebase";
 
-export const Notes = () => { 
-
-   const [datos, setDatos] = useState({
+export const Notes = ({setDatos}) => {
+    //Se crea arreglo para actualizar el estado de los inputs, en los inputs se almacena la información de las notas 
+   const [inputs, setInputs] = useState([{
        title: '',
        description: ''
-   })
+   }])
 
     //Se crea evento para pintar los datos de las notas
    const handleInputChange = (event) => {
        console.log('funciona')
-        setDatos({
+        setInputs({
             //Se realiza copia de los datos que se irán modificando
-            ...datos,
+            ...inputs,
             [event.target.name] : event.target.value
         })
     }
@@ -22,12 +22,19 @@ export const Notes = () => {
     //Se crea el evento del botón para guardar la nota
     const guardarDatos = async (event) => {
         event.preventDefault();
-        console.log(datos.title + ' ' + datos.description)
+        console.log(inputs.title + ' ' + inputs.description)
         let dataToSend = {
-            title: datos.title,
-            description: datos.description
+            title: inputs.title,
+            description: inputs.description
         }
+        //Se crea variable para enviar los datos a la colección 
         let docRef = await addDoc(collection(db, "noteCollection"), dataToSend)
+        getNotes().then((newDatos) => {
+            console.log(newDatos)
+            //Se utiliza setDatos para que se actualicen los datos
+            setDatos(newDatos)
+        })
+        event.target.reset();
     };
     
     return (
@@ -42,21 +49,6 @@ export const Notes = () => {
                         onChange={handleInputChange}>
                     </input>
                 </div>
-                {/* {
-                    listaDeNotas.map(nota => {
-                        return (
-                            <div>
-                                <div>
-                                    <h1>{nota.titulo}</h1>
-                                </div>
-                                <div>
-                                    <h2>{nota.desvcripcion}</h2>
-                                </div>
-                            </div> 
-                            <Nota titulo = {nota.titulo} description = {nota.desvcripcion}/>
-                        )
-                    }) 
-                } */}
 
                 <div>
                     <textarea 
@@ -71,7 +63,7 @@ export const Notes = () => {
                     <button id="button-note" type="submit">Save</button>
                 </div>
             </form>
-            <h3>{datos.title} - {datos.description}</h3>
+            <h3>{inputs.title} - {inputs.description}</h3>
         </div>
     )
 }

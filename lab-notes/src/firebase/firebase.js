@@ -1,10 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import "firebase/analytics";
-import { getFirestore, collection, getDocs, query } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, query, doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
-/* import { getFirestore, addDoc, collection, onSnapshot } from "firebase/firestore";  */
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,11 +34,9 @@ async function getNotes() {
   const notesCol = query(collection(db, 'noteCollection'));
   const noteSnapshot = await getDocs(notesCol);
   const noteList = noteSnapshot.docs.map(doc =>{
-    return doc.data()
+    return ({...doc.data(), id: doc.id})
   });
   return noteList;
 }
-
 export { db, getNotes };
-//Esta función es propia de Firestore para recargar autamaticamente las notas
-/* export { addDoc, collection, onSnapshot } */ 
+
