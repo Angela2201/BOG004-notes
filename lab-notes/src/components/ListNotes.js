@@ -1,12 +1,39 @@
-import { db } from "../firebase/firebase"
-import { doc, deleteDoc } from "firebase/firestore"
+import React, { useState, useEffect } from "react";
+import { db, getNotes } from "../firebase/firebase"
+import { doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore"
+import { async } from "@firebase/util"
 
 //En este componente se pintan las notas en el muro
-export const ListNotes = ({datos}) => {
+export const ListNotes = ({datos, setDatos}) => {
 
-    const handleEdit = () => {
-        console.log("Edita")
+    const [inputs, setInputs] = useState([{
+        title: '',
+        description: ''
+    }])
+
+    const handleEdit = async (e, id) => {
+        e.preventDefault()
+        const note = doc(db, 'noteCollection', id)
+        const data = {title: inputs.title, description: inputs.description}
+        //Se pasa función de Firestore para actualizar datos
+        await updateDoc(note, data)        
     }
+
+    //Se crea la función para obtener un único Id
+    const getNoteById = async (id) => {
+        const note = await getDoc(doc(db, 'noteCollection', id)) 
+        if(note.exists()) {
+            console.log(note.data()) 
+            setInputs(note.data().title)
+            setInputs(note.data().description)
+        } else {
+            console.log('Note does not exist')
+        }
+    }
+
+    useEffect(() => {
+        getNoteById(id)
+    }, []);
 
     //Se crea la función de eliminar las notas
     const handleDelete = async (id) => {
@@ -15,6 +42,10 @@ export const ListNotes = ({datos}) => {
             const docRef = doc(db, 'noteCollection', id);
             await deleteDoc(docRef);
         }
+        getNotes().then((newDatos) => {
+            //Se utiliza setDatos para que se actualicen los datos
+            setDatos(newDatos)
+        })
     }
     
     return (

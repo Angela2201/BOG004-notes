@@ -40,8 +40,8 @@ const Wall = () => {
                     </button>
                 </form>
             </div>
-            <Notes setDatos={setDatos}/>
-            <ListNotes datos={datos}/>
+            <Notes datos={datos} setDatos={setDatos}/>
+            <ListNotes datos={datos} setDatos={setDatos}/>
         </div>         
     )
 }
