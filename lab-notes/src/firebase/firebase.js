@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import "firebase/analytics";
-import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, updateDoc, doc } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -48,4 +48,9 @@ function notesData(setDatos) {
   });
 }
 
-export { db, getNotes, notesData };
+//Se crea función para que se actualicen los datos que son editados
+async function updateEditedNote(id, title, description) {
+  await updateDoc(doc(db, 'noteCollection', id), { title, description })
+};
+
+export { db, getNotes, notesData, updateEditedNote };
