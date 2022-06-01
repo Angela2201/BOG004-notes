@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { db, getNotes } from "../firebase/firebase";
+import { db, notesData } from "../firebase/firebase";
 
-export const Notes = ({datos, setDatos}) => {
+export const Notes = ({datos, setDatos }) => {
     //Se crea arreglo para actualizar el estado de los inputs, en los inputs se almacena la información de las notas 
-   const [inputs, setInputs] = useState([{
+   const [inputs, setInputs] = useState ({
        title: '',
        description: ''
-   }])
+    })
 
     //Se crea evento para pintar los datos de las notas
-   const handleInputChange = (event) => {
+    const handleInputChange = (event) => {
        console.log('funciona')
         setInputs({
             //Se realiza copia de los datos que se irán modificando
@@ -29,10 +29,8 @@ export const Notes = ({datos, setDatos}) => {
         }
         //Se crea variable para enviar los datos a la colección 
         let docRef = await addDoc(collection(db, "noteCollection"), dataToSend)
-        getNotes().then((newDatos) => {
-            //Se utiliza setDatos para que se actualicen los datos
-            setDatos(newDatos)
-        })
+        notesData(setDatos)
+        //Limpia los datos de la nota
         event.target.reset();
     };
     
@@ -45,7 +43,7 @@ export const Notes = ({datos, setDatos}) => {
                         id="note-title" 
                         name="title"
                         placeholder="Title Note" 
-                        onChange={handleInputChange}>
+                        onChange={handleInputChange} value={inputs.title}>
                     </input>
                 </div>
 
@@ -55,7 +53,7 @@ export const Notes = ({datos, setDatos}) => {
                         id="note-description" 
                         name="description"
                         placeholder="Description Note" 
-                        onChange={handleInputChange}>
+                        onChange={handleInputChange} value={inputs.description}>
                     </textarea>
                 </div>
                 <div>

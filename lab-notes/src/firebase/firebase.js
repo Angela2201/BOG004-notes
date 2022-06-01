@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import "firebase/analytics";
-import { getFirestore, collection, getDocs, query, doc, deleteDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -36,7 +36,16 @@ async function getNotes() {
   const noteList = noteSnapshot.docs.map(doc =>{
     return ({...doc.data(), id: doc.id})
   });
+  console.log(noteList)
   return noteList;
 }
-export { db, getNotes };
 
+//Se crea función para cambiar el valor de datos de la lista de notas
+function notesData(setDatos) {
+  getNotes().then((newDatos) => {
+    //Se usa setDatos para actualizar los datos
+    setDatos(newDatos)
+  });
+}
+
+export { db, getNotes, notesData };

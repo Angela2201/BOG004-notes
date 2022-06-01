@@ -1,39 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { db, getNotes } from "../firebase/firebase"
+import { db, notesData } from "../firebase/firebase"
 import { doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore"
-import { async } from "@firebase/util"
 
 //En este componente se pintan las notas en el muro
-export const ListNotes = ({datos, setDatos}) => {
+export const ListNotes = ({ datos, setDatos }) => {
 
-    const [inputs, setInputs] = useState([{
+    const [data, setData] = useState([{
         title: '',
         description: ''
     }])
 
-    const handleEdit = async (e, id) => {
-        e.preventDefault()
-        const note = doc(db, 'noteCollection', id)
-        const data = {title: inputs.title, description: inputs.description}
-        //Se pasa función de Firestore para actualizar datos
-        await updateDoc(note, data)        
+    const handleEdit = (event) => {
+        console.log(event.target)
+        console.log(event.target.parentElement.children[0])
+        event.target.parentElement.children[0].disabled = false
+        event.target.parentElement.children[1].disabled = false
+        
     }
 
-    //Se crea la función para obtener un único Id
-    const getNoteById = async (id) => {
-        const note = await getDoc(doc(db, 'noteCollection', id)) 
-        if(note.exists()) {
-            console.log(note.data()) 
-            setInputs(note.data().title)
-            setInputs(note.data().description)
-        } else {
-            console.log('Note does not exist')
-        }
+
+    const handleChange = (event) => {
+        setData({
+            //Se realiza copia de los datos que se irán modificando
+            ...data,
+            [event.target.item] : event.target.value,
+            /* [event.target.description] : event.target.value */
+        })
     }
 
-    useEffect(() => {
-        getNoteById(id)
-    }, []);
+    const updateNote = (id, note) => {
+        const updateList = data.map((e, item) => {
+            if(item === id){
+                e = note;
+            }
+            return e;
+        })
+        setData(updateList)
+    }
+
+    /* await updateDoc(note, data) */
+
 
     //Se crea la función de eliminar las notas
     const handleDelete = async (id) => {
@@ -42,22 +48,25 @@ export const ListNotes = ({datos, setDatos}) => {
             const docRef = doc(db, 'noteCollection', id);
             await deleteDoc(docRef);
         }
-        getNotes().then((newDatos) => {
-            //Se utiliza setDatos para que se actualicen los datos
-            setDatos(newDatos)
-        })
+        notesData(setDatos)
     }
-    
+
+    //"useEffect" ejecuta nuestra función "notesData", cada vez que haya un cambio en el estado al recibir un "props" nuevo (datos, setDatos)
+    useEffect(() => {
+        notesData(setDatos)
+    }, []);
+
+
     return (
-        <div> 
+        <div>
             <ul>{
-            datos.map((item, id) => 
-                <li key = {id}>
-                    <textarea disabled value={item.title}/>
-                    <textarea disabled value={item.description}/>
-                    <button onClick={handleEdit}>Edit</button>
-                    <button onClick={() => handleDelete(item.id)}>Delete</button>
-                </li>
+                datos.map((item, id) =>
+                    <li key={id}>
+                        <textarea disabled value={item.title} onChange={(event) => handleChange(event, item)}/>
+                        <textarea disabled value={item.description} onChange={(event) => handleChange(event, item)}/>
+                        <button onClick={(event) => handleEdit(event, item)}>Edit</button>
+                        <button onClick={() => handleDelete(item.id)}>Delete</button>
+                    </li>
                 )
             }</ul>
         </div>
