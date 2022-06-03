@@ -32,6 +32,10 @@ export const Notes = ({datos, setDatos }) => {
         notesData(setDatos)
         //Limpia los datos de la nota
         event.target.reset();
+        setInputs({
+            title:'',
+            description: ''
+        })
     };
     
     return (
