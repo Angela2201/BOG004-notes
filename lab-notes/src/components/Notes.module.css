@@ -1,23 +1,5 @@
-h1 {
-    color: blanchedalmond;
-}
-  
-#header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  
-#button-logOut {
-    margin: 50px;
-}
-  
-.logOut {
-    width: 45px;
-}
-  
-#note {
-    width: 50%;
+.note {
+    width: 40%;
     height: 14vh;
     background-color: #ffffff95;
     margin: auto;
@@ -28,14 +10,14 @@ h1 {
     align-items: center;
 }
   
-#note-title {
+.noteTitle {
     font-size: 18px;
     font-family: arial;
     text-align: center;
     width: 250px;
 }
   
-#note-description {
+.noteDescription {
     margin-top: 8px;
     font-size: 18px;
     font-family: arial;
@@ -43,7 +25,7 @@ h1 {
     width: 252px;
 }
   
-#button-note {
+.btnNote {
     padding: 6px 16px 6px 16px;
     font-size: 16px;
     font-family: arial;

@@ -1,6 +1,7 @@
 import React from "react";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import styles from './Home.module.css';
 
 const Home = () => {
 
@@ -28,11 +29,11 @@ const Home = () => {
 
     //Retorna el componente que pinta la vista de Home
     return (
-        <div id="view-home">
-            <div id="home">
-                <img className="logo" src="https://i.imgur.com/ncVcTA8.png"></img>
-                <button onClick={signInWithGoogle} id="btn-google">
-                    <img className="logoGoogle" src="https://i.imgur.com/bD3SqPX.png" alt="logoGoogle"></img>
+        <div id="view-home" className={styles.viewHome}>
+            <div id="home" className={styles.home}>
+                <img className={styles.logo} src="https://i.imgur.com/ncVcTA8.png"></img>
+                <button onClick={signInWithGoogle} id="btn-google" className={styles.btnGoogle}>
+                    <img className={styles.logoGoogle} src="https://i.imgur.com/bD3SqPX.png" alt="logoGoogle"></img>
                     Continue With Google
                 </button>
             </div>

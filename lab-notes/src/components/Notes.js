@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db, notesData } from "../firebase/firebase";
+import styles from './Notes.module.css';
 
 export const Notes = ({datos, setDatos }) => {
     //Se crea arreglo para actualizar el estado de los inputs, en los inputs se almacena la información de las notas 
@@ -39,12 +40,13 @@ export const Notes = ({datos, setDatos }) => {
     };
     
     return (
-        <div id="note">
+        <div id="note" className={styles.note}>
             <form onSubmit={guardarDatos}>
                 <div>
                     <input 
                         type="text" 
                         id="note-title" 
+                        className={styles.noteTitle}
                         name="title"
                         placeholder="Title Note" 
                         onChange={handleInputChange} value={inputs.title}>
@@ -55,13 +57,14 @@ export const Notes = ({datos, setDatos }) => {
                     <textarea 
                         type="text" 
                         id="note-description" 
+                        className={styles.noteDescription}
                         name="description"
                         placeholder="Description Note" 
                         onChange={handleInputChange} value={inputs.description}>
                     </textarea>
                 </div>
                 <div>
-                    <button id="button-note" type="submit">Save</button>
+                    <button id="button-note" className={styles.btnNote} type="submit">Save</button>
                 </div>
             </form>
         </div>

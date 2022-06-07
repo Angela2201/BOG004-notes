@@ -1,3 +1,10 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
 body {
     background-image: linear-gradient(to right, rgb(30, 30, 92) , rgb(96, 104, 177));
     margin: 0;  
@@ -16,14 +23,14 @@ body {
     text-align: center;
 }
   
- #home {
+.home {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 137px;
 }
   
-#btn-google {
+.btnGoogle {
     align-items: center;
     width: 41%;
     padding: 13px;

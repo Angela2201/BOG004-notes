@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db, notesData, updateEditedNote } from "../firebase/firebase"
 import { doc, deleteDoc } from "firebase/firestore"
+import styles from './ListNotes.module.css';
 
 //En este componente se pintan las notas en el muro
 export const ListNotes = ({ datos, setDatos }) => {
@@ -59,26 +60,30 @@ export const ListNotes = ({ datos, setDatos }) => {
 
     // console.log(datos)
     return (
-        <div>
-            <ul>{
+        <div className={styles.divNotes}>
+            <p>{
                 datos.map((item, id) =>
-                    <li key={id}>
+                    <p key={id} className={styles.listNotes}>
                         <textarea
+                            className={styles.listTitle}
                             disabled
                             readOnly={item.id !== noteId} 
                             value={item.title} 
                             onChange={(event) => changeTitle(event, id)}/>
                         <textarea
+                            className={styles.listDescription}
                             disabled
                             readOnly={item.id !== noteId} 
                             value={item.description} 
                             onChange={(event) => changeDescription(event, id)}/>
-                        <button onClick={(event) => handleEdit(event, item.id)}>Edit</button>
-                        <button onClick={(event) => handleUpdate(event, noteId)}>Save</button>
-                        <button onClick={() => handleDelete(item.id)}>Delete</button>
-                    </li>
+                        <div className={styles.btn}>
+                        <button className={styles.btn1} onClick={(event) => handleEdit(event, item.id)}>Edit</button>
+                        <button className={styles.btn2} onClick={(event) => handleUpdate(event, noteId)}>Save</button>
+                        <button className={styles.btn3} onClick={() => handleDelete(item.id)}>Delete</button>
+                        </div>
+                    </p>
                 )
-            }</ul>
+            }</p>
         </div>
     )
 }
