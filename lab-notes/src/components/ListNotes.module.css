@@ -1,43 +1,34 @@
-/* .divNotes {
+ul {
     display: grid; 
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 100px;
-    grid-gap: 20px;
-} */
-
-
+}
 
 .listNotes {
-    width: 40%;
+    width: 90%;
     height: 14vh;
     background-color: #ffffff95;
     margin: auto;
-    margin-top: 3%;
-    border-radius: 20px;
+    margin-top: 10%;
     border-radius: 50% 20% / 10% 40%; 
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; */
-
 }
 
 .listTitle, .listDescription {
     letter-spacing: 1px;
-    /* display: flex; */
     text-align: center;
-    align-items: center;
-    /* justify-content: center; */
-    /* flex-direction: column; */
-    margin-top: 8px;
+    display: grid;
+    margin-top: 13px;
+    margin-left: 30px;
 }
 
 .btn {
     margin-top: 5px;
     padding: 2px 4px 2px 4px;
-    letter-spacing: 1px;
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-between;
+    border: none;
+    background: none;
+}
+
+.btnEdit, .btnSave, .btnDelete {
+    pointer-events: none; 
+    width: 25px;
 }
 

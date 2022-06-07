@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { db, notesData, updateEditedNote } from "../firebase/firebase"
 import { doc, deleteDoc } from "firebase/firestore"
 import styles from './ListNotes.module.css';
@@ -61,7 +61,7 @@ export const ListNotes = ({ datos, setDatos }) => {
     // console.log(datos)
     return (
         <div className={styles.divNotes}>
-            <p>{
+            <ul>{
                 datos.map((item, id) =>
                     <p key={id} className={styles.listNotes}>
                         <textarea
@@ -76,14 +76,18 @@ export const ListNotes = ({ datos, setDatos }) => {
                             readOnly={item.id !== noteId} 
                             value={item.description} 
                             onChange={(event) => changeDescription(event, id)}/>
-                        <div className={styles.btn}>
-                        <button className={styles.btn1} onClick={(event) => handleEdit(event, item.id)}>Edit</button>
-                        <button className={styles.btn2} onClick={(event) => handleUpdate(event, noteId)}>Save</button>
-                        <button className={styles.btn3} onClick={() => handleDelete(item.id)}>Delete</button>
-                        </div>
+                        <button className={styles.btn} onClick={(event) => handleEdit(event, item.id)}>
+                            <img className={styles.btnEdit} src="https://i.imgur.com/xJPsn7E.png"></img>
+                        </button>
+                        <button className={styles.btn} onClick={(event) => handleUpdate(event, noteId)}>
+                            <img className={styles.btnSave} src="https://i.imgur.com/kKGYZLC.png"></img>
+                        </button>
+                        <button className={styles.btn} onClick={() => handleDelete(item.id)}>
+                            <img className={styles.btnDelete} src="https://i.imgur.com/EpR2Yrx.png"></img>
+                        </button>
                     </p>
                 )
-            }</p>
+            }</ul>
         </div>
     )
 }

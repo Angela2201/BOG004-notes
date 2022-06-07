@@ -64,7 +64,9 @@ export const Notes = ({datos, setDatos }) => {
                     </textarea>
                 </div>
                 <div>
-                    <button id="button-note" className={styles.btnNote} type="submit">Save</button>
+                    <button id="button-note" className={styles.btnNote} type="submit">
+                        <img className={styles.btnImgAdd} src="https://i.imgur.com/mNrOwso.png"></img>
+                    </button>
                 </div>
             </form>
         </div>

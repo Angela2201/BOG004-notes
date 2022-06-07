@@ -26,10 +26,14 @@
 }
   
 .btnNote {
-    padding: 6px 16px 6px 16px;
-    font-size: 16px;
-    font-family: arial;
-    margin-left: 96px;
-    border-radius: 10px;
-    margin-top: 8px;
+    border: none;
+    background: none;
 }
+
+.btnImgAdd {
+    pointer-events: none; 
+    width: 30px;
+    margin-top: 5px;
+    margin-left: 115px;
+}
+
