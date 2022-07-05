@@ -1,0 +1,39 @@
+.note {
+    width: 40%;
+    height: 14vh;
+    background-color: #ffffff95;
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.noteTitle {
+    font-size: 18px;
+    font-family: arial;
+    text-align: center;
+    width: 250px;
+}
+  
+.noteDescription {
+    margin-top: 8px;
+    font-size: 18px;
+    font-family: arial;
+    text-align: center;
+    width: 252px;
+}
+  
+.btnNote {
+    border: none;
+    background: none;
+}
+
+.btnImgAdd {
+    pointer-events: none; 
+    width: 30px;
+    margin-top: 5px;
+    margin-left: 115px;
+}
+
