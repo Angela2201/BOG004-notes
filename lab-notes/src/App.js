@@ -19,12 +19,13 @@ function App() {
       <header>
         <nav>
           <ul>
-            <li><Link to='/'>Home</Link></li>
+            <li><Link to='./'>Home</Link></li>
             <li><Link to='/wall'>Wall</Link></li>
           </ul>
         </nav>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='' element={<Home />} />
           <Route path='/wall' element={<Wall />} />
           <Route path="*" element={<NotFound />} /> 
         </Routes>
